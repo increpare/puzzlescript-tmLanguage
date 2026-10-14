@@ -1,0 +1,347 @@
+{
+  "name": "PuzzleScript",
+  "scopeName": "source.puzzlescript",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#separator"
+    },
+    {
+      "include": "#objects"
+    },
+    {
+      "include": "#legend"
+    },
+    {
+      "include": "#sounds"
+    },
+    {
+      "include": "#collisionlayers"
+    },
+    {
+      "include": "#rules"
+    },
+    {
+      "include": "#winconditions"
+    },
+    {
+      "include": "#levels"
+    },
+    {
+      "include": "#metadata"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "name": "comment.block.puzzlescript",
+      "begin": "\\(",
+      "end": "\\)",
+      "patterns": [
+        {
+          "include": "#comments"
+        }
+      ]
+    },
+    "separator": {
+      "name": "punctuation.separator.section.puzzlescript",
+      "match": "^[ \\t]*=+[ \\t]*$"
+    },
+    "metadata": {
+      "patterns": [
+        {
+          "begin": "^[ \\t]*((?i:title|author|homepage|background_color|text_color|key_repeat_interval|realtime_interval|again_interval|flickscreen|zoomscreen|color_palette|youtube))\\b",
+          "beginCaptures": {
+            "1": {
+              "name": "support.type.property-name.metadata.puzzlescript"
+            }
+          },
+          "end": "$",
+          "contentName": "string.unquoted.metadata.puzzlescript",
+          "patterns": [
+            {
+              "include": "#comments"
+            }
+          ]
+        },
+        {
+          "name": "support.type.property-name.metadata.puzzlescript",
+          "match": "(?i)^[ \\t]*(?:run_rules_on_level_start|norepeat_action|require_player_movement|debug|verbose_logging|throttle_movement|noundo|noaction|norestart|scanline)\\b"
+        }
+      ]
+    },
+    "objects": {
+      "name": "meta.section.objects.puzzlescript",
+      "begin": "^[ \\t]*((?i:objects))(?=[ \\t(]|$)",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.section.puzzlescript"
+        }
+      },
+      "end": "(?=^[ \\t]*(?i:(?:objects|legend|sounds|collisionlayers|rules|winconditions|levels))(?=[ \\t(]|$))",
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#separator"
+        },
+        {
+          "name": "constant.other.color.puzzlescript",
+          "match": "(?i)#(?:[0-9a-f]{6}|[0-9a-f]{3})\\b|\\b(?:black|white|gr[ae]y|darkgr[ae]y|lightgr[ae]y|red|darkred|lightred|brown|darkbrown|lightbrown|orange|yellow|green|darkgreen|lightgreen|blue|lightblue|darkblue|purple|pink|transparent)\\b"
+        },
+        {
+          "name": "constant.numeric.sprite.puzzlescript",
+          "match": "^[ \\t]*[.0-9]+[ \\t]*$"
+        },
+        {
+          "name": "variable.other.object.puzzlescript",
+          "match": "[\\p{L}\\p{N}_]+"
+        }
+      ]
+    },
+    "legend": {
+      "name": "meta.section.legend.puzzlescript",
+      "begin": "^[ \\t]*((?i:legend))(?=[ \\t(]|$)",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.section.puzzlescript"
+        }
+      },
+      "end": "(?=^[ \\t]*(?i:(?:objects|legend|sounds|collisionlayers|rules|winconditions|levels))(?=[ \\t(]|$))",
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#separator"
+        },
+        {
+          "name": "keyword.operator.assignment.puzzlescript",
+          "match": "="
+        },
+        {
+          "name": "keyword.operator.logical.puzzlescript",
+          "match": "(?i)\\b(?:and|or)\\b"
+        },
+        {
+          "name": "variable.other.object.puzzlescript",
+          "match": "[\\p{L}\\p{N}_]+"
+        }
+      ]
+    },
+    "sounds": {
+      "name": "meta.section.sounds.puzzlescript",
+      "begin": "^[ \\t]*((?i:sounds))(?=[ \\t(]|$)",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.section.puzzlescript"
+        }
+      },
+      "end": "(?=^[ \\t]*(?i:(?:objects|legend|sounds|collisionlayers|rules|winconditions|levels))(?=[ \\t(]|$))",
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#separator"
+        },
+        {
+          "name": "support.function.sound-event.puzzlescript",
+          "match": "(?i)\\b(?:undo|restart|titlescreen|startgame|cancel|endgame|startlevel|endlevel|showmessage|closemessage|sfx(?:10|[0-9]))\\b"
+        },
+        {
+          "name": "support.function.sound-verb.puzzlescript",
+          "match": "(?i)\\b(?:move|action|create|destroy|cantmove)\\b"
+        },
+        {
+          "name": "keyword.other.direction.puzzlescript",
+          "match": "(?i)\\b(?:up|down|left|right|horizontal|vertical|orthogonal|moving|stationary|parallel|perpendicular|randomdir|random|action|late|rigid|no)\\b|(?<![\\p{L}\\p{N}_])v(?![\\p{L}\\p{N}_])|[\\^<>]"
+        },
+        {
+          "name": "constant.numeric.sound-seed.puzzlescript",
+          "match": "\\b[0-9]+\\b"
+        },
+        {
+          "name": "variable.other.object.puzzlescript",
+          "match": "[\\p{L}\\p{N}_]+"
+        }
+      ]
+    },
+    "collisionlayers": {
+      "name": "meta.section.collisionlayers.puzzlescript",
+      "begin": "^[ \\t]*((?i:collisionlayers))(?=[ \\t(]|$)",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.section.puzzlescript"
+        }
+      },
+      "end": "(?=^[ \\t]*(?i:(?:objects|legend|sounds|collisionlayers|rules|winconditions|levels))(?=[ \\t(]|$))",
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#separator"
+        },
+        {
+          "name": "punctuation.separator.comma.puzzlescript",
+          "match": ","
+        },
+        {
+          "name": "variable.other.object.puzzlescript",
+          "match": "[\\p{L}\\p{N}_]+"
+        }
+      ]
+    },
+    "rules": {
+      "name": "meta.section.rules.puzzlescript",
+      "begin": "^[ \\t]*((?i:rules))(?=[ \\t(]|$)",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.section.puzzlescript"
+        }
+      },
+      "end": "(?=^[ \\t]*(?i:(?:objects|legend|sounds|collisionlayers|rules|winconditions|levels))(?=[ \\t(]|$))",
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#separator"
+        },
+        {
+          "name": "keyword.control.loop.puzzlescript",
+          "match": "(?i)^[ \\t]*(?:startloop|endloop)\\b"
+        },
+        {
+          "name": "meta.rule.cell.puzzlescript",
+          "begin": "\\[",
+          "end": "\\]",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.section.brackets.puzzlescript"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.brackets.puzzlescript"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#comments"
+            },
+            {
+              "name": "keyword.other.direction.puzzlescript",
+              "match": "(?i)\\b(?:up|down|left|right|horizontal|vertical|orthogonal|moving|stationary|parallel|perpendicular|randomdir|random|action|late|rigid|no)\\b|(?<![\\p{L}\\p{N}_])v(?![\\p{L}\\p{N}_])|[\\^<>]"
+            },
+            {
+              "name": "keyword.operator.ellipsis.puzzlescript",
+              "match": "\\.\\.\\."
+            },
+            {
+              "name": "punctuation.separator.cell.puzzlescript",
+              "match": "\\|"
+            },
+            {
+              "name": "variable.other.object.puzzlescript",
+              "match": "[\\p{L}\\p{N}_]+"
+            }
+          ]
+        },
+        {
+          "begin": "(?i)\\b(message)\\b",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.other.command.puzzlescript"
+            }
+          },
+          "end": "$",
+          "contentName": "string.unquoted.message.puzzlescript",
+          "patterns": []
+        },
+        {
+          "name": "keyword.other.command.puzzlescript",
+          "match": "(?i)\\b(?:cancel|checkpoint|restart|win|again|sfx(?:10|[0-9]))\\b"
+        },
+        {
+          "name": "keyword.operator.arrow.puzzlescript",
+          "match": "->"
+        },
+        {
+          "name": "keyword.other.direction.puzzlescript",
+          "match": "(?i)\\b(?:up|down|left|right|horizontal|vertical|orthogonal|moving|stationary|parallel|perpendicular|randomdir|random|action|late|rigid|no)\\b|(?<![\\p{L}\\p{N}_])v(?![\\p{L}\\p{N}_])|[\\^<>]"
+        },
+        {
+          "name": "keyword.operator.group.puzzlescript",
+          "match": "\\+"
+        },
+        {
+          "name": "variable.other.object.puzzlescript",
+          "match": "[\\p{L}\\p{N}_]+"
+        }
+      ]
+    },
+    "winconditions": {
+      "name": "meta.section.winconditions.puzzlescript",
+      "begin": "^[ \\t]*((?i:winconditions))(?=[ \\t(]|$)",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.section.puzzlescript"
+        }
+      },
+      "end": "(?=^[ \\t]*(?i:(?:objects|legend|sounds|collisionlayers|rules|winconditions|levels))(?=[ \\t(]|$))",
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#separator"
+        },
+        {
+          "name": "keyword.operator.logical.puzzlescript",
+          "match": "(?i)\\b(?:all|any|no|some|on)\\b"
+        },
+        {
+          "name": "variable.other.object.puzzlescript",
+          "match": "[\\p{L}\\p{N}_]+"
+        }
+      ]
+    },
+    "levels": {
+      "name": "meta.section.levels.puzzlescript",
+      "begin": "^[ \\t]*((?i:levels))(?=[ \\t(]|$)",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.section.puzzlescript"
+        }
+      },
+      "end": "(?=^[ \\t]*(?i:(?:objects|legend|sounds|collisionlayers|rules|winconditions|levels))(?=[ \\t(]|$))",
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#separator"
+        },
+        {
+          "begin": "^[ \\t]*((?i:message))\\b",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.other.command.puzzlescript"
+            }
+          },
+          "end": "$",
+          "contentName": "string.unquoted.message.puzzlescript",
+          "patterns": []
+        },
+        {
+          "name": "string.unquoted.level.puzzlescript",
+          "match": "[^ \\t(]+"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "puzzlescript-tmlanguage",
+  "version": "0.1.0",
+  "private": true,
+  "description": "TextMate grammar for PuzzleScript",
+  "license": "MIT",
+  "type": "module",
+  "repository": "github:increpare/puzzlescript-tmLanguage",
+  "scripts": {
+    "build": "node scripts/build-grammar.mjs",
+    "test": "node --test test/*.test.mjs"
+  },
+  "devDependencies": {
+    "vscode-oniguruma": "2.0.1",
+    "vscode-textmate": "9.3.2"
+  }
+}
